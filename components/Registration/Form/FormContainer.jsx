@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./Form.module.scss";
-import Success from "./Success";
+// import Success from "./Success";
 import Form from "./Form";
 
 const FormContainer = () => {
