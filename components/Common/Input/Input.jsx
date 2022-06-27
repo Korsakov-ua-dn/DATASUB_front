@@ -26,8 +26,6 @@ const Input = ({
   };
 
   const isError = !!errorMessage && touched;
-  // const isOk = touched && !errorMessage && !!value.length;
-  // const isPaddingRight = isError || isOk;
 
   const trimSpace = (str) =>
     str
@@ -44,13 +42,6 @@ const Input = ({
 
     handleBlur(e);
   };
-
-  // const onChangeHandler = (e) => {
-  //   if (e.target.value.length) {
-  //     setFieldTouched(name, true);
-  //   }
-  //   onChange(e);
-  // };
 
   return (
     <div style={{ marginBottom: marginBottom }} className={s.wrapper}>
@@ -69,10 +60,6 @@ const Input = ({
         inputProps={{
           maxLength: n,
           inputMode: inputmode,
-
-          style: {
-            // paddingRight: isPaddingRight && 44,
-          },
         }}
       />
       {n && (
@@ -86,7 +73,7 @@ const Input = ({
 
 export const InputWithStyle = styled(TextField)`
   & .MuiInputBase-input.MuiOutlinedInput-input {
-    font-family: "Asap", sans-serif;
+    font-family: sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -94,6 +81,8 @@ export const InputWithStyle = styled(TextField)`
     letter-spacing: normal;
     color: ${variables.textColor};
     height: 21px;
+    border-radius: 4px;
+    // text-shadow: 4px 3px 3px rgb(0 0 0 / 40%); Выглядит плохо
     -webkit-box-shadow: inset 0 0 0 50px ${variables.backgroundColor}; /* накладываеть тень поверх инпута т.к. с автозполнением из браузера прилетают другие стили*/
     -webkit-text-fill-color: ${variables.textColor}; // побочный эффект => перезаливает плейсхолдер
 
@@ -113,7 +102,7 @@ export const InputWithStyle = styled(TextField)`
   }
 
   & label {
-    font-family: "Asap", sans-serif;
+    font-family: sans-serif;
     font-style: normal;
     font-weight: normal;
     letter-spacing: normal;
@@ -173,7 +162,7 @@ export const InputWithStyle = styled(TextField)`
     padding: 3px 70px 0 14px;
     margin: 0;
     
-    font-family: "Asap", sans-serif;
+    font-family: sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 12px;

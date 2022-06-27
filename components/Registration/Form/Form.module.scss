@@ -1,6 +1,10 @@
 .section {
   width: 100%;
+  min-height: 602px;
   padding-top: 88px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
@@ -10,20 +14,6 @@
   height: 100%;
   margin: 0 auto;
   text-align: center;
-
-  h1 {
-    font-size: 60px;
-    line-height: 64px;
-
-    margin-bottom: 23px;
-  }
-
-  h3 {
-    font-size: 28px;
-    line-height: 40px;
-
-    margin-bottom: 45px;
-  }
 }
 
 .formWrapper {
@@ -34,30 +24,6 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-}
-
-.disabledModalWrapper {
-  position: absolute;
-  width: 100%;
-  top: -32px;
-  bottom: -32px;
-  z-index: 18;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.85);
-
-  h3 {
-    width: 360px;
-    font-size: 28px;
-    line-height: 40px;
-
-    margin-bottom: 49px;
-  }
 }
 
 .form {
@@ -77,6 +43,12 @@
   margin-top: 77px;
 }
 
+.error {
+  position: fixed;
+  bottom: 15px;
+  color: #CB3D40;
+}
+
 @media screen and (max-width: 1440px) {
   .container {
     padding: 0 32px;
@@ -86,11 +58,6 @@
 @media screen and (max-width: 1023px) {
   .container {
     padding: 0 24px;
-
-    h1 {
-      font-size: 38px;
-      line-height: 40px;
-    }
   }
 }
 
@@ -101,19 +68,6 @@
 
   .container {
     padding: 0 16px;
-
-    h1 {
-      font-size: 28px;
-
-      margin-bottom: 18px;
-    }
-
-    h3 {
-      font-size: 18px;
-      line-height: 26px;
-
-      margin-bottom: 31px;
-    }
   }
 
   .form {
@@ -127,21 +81,5 @@
 
   .submitWrapper {
     margin: 49px 0 24px;
-  }
-
-  .disabledModalWrapper {
-    top: -23px;
-    bottom: 0;
-
-    justify-content: flex-start;
-
-    h3 {
-      width: 100%;
-      padding: 0 16px;
-      font-size: 18px;
-      line-height: 26px;
-
-      margin: 55px 0 40px;
-    }
   }
 }

@@ -20,12 +20,13 @@ const Btn = ({
 
   const StyledButton = styled(Button)`
     &.MuiButton-root {
+      position: relative;
       height: 50px;
       border-radius: 80px;
       box-shadow: none;
       overflow: hidden;
       border-width: 2px;
-      font-family: "Asap", sans-serif;
+      font-family: sans-serif;
       font-style: normal;
       font-weight: normal;
       font-size: 18px;
@@ -40,9 +41,22 @@ const Btn = ({
       }
 
       & .MuiTouchRipple-rippleVisible span {
-        background-color: rgba(216, 209, 40);
+        background-color:#ffffff;
         opacity: 1;
       }
+
+      &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, ${variables.btnHoverPrimaryColor}, #fff, ${variables.btnHoverPrimaryColor});
+        transition: left .7s;
+      }
+
+
     }
 
     &.MuiButton-sizeSmall {
@@ -92,11 +106,15 @@ const Btn = ({
       background-color: ${variables.primaryColor};
       color: ${variables.textColor};
 
-      &:hover {
-        background-color: ${variables.btnHoverPrimaryColor};
-        border-color: ${variables.btnHoverPrimaryColor};
-        box-shadow: none;
+      &:hover:before{
+        left: 0;
       }
+
+      // &:hover {
+      //   background-color: ${variables.btnHoverPrimaryColor};
+      //   border-color: ${variables.btnHoverPrimaryColor};
+      //   box-shadow: none;
+      // }
     }
 
     &:active,
@@ -157,11 +175,6 @@ const Btn = ({
     }
   `;
 
-  // const buttonRef = React.useRef(null);
-  // const onClickHandler = (e) => {
-  //   console.log(buttonRef.current);
-  //   buttonRef.current.click();
-  // };
   return (
     <div style={{ width: width, marginBottom: marginBottom }}>
       <StyledButton

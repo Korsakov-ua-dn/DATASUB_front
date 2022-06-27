@@ -1,5 +1,4 @@
 import s from "./Form.module.scss";
-import DisabledModal from "./DisabledModal";
 import { Formik } from "formik";
 import { validateForm } from "../../../utils/validateForm";
 import Input from "../../Common/Input/Input";
@@ -7,35 +6,32 @@ import InputWithMask from "../../Common/Input/InputWithMask";
 import Btn from "../../Common/Buttons/Btn/Btn";
 import { createPayTC } from "../../../store/reducers/app-reducer";
 import { useDispatch } from "react-redux";
+import Preloader from "../../Common/Preloader/Preloader";
 
-const Form = ({ isServerError }) => {
+const Form = ({ isServerError, isPreloader }) => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    name: "",
-    email: "",
-    phone: "",
-    position: "",
+    CardNumber: "",
+    ExpDate: "",
+    Cvv: "",
+    Amount: "",
   };
 
   return (
     <div className={s.formWrapper}>
 
-      {isServerError && <DisabledModal t={t} />}
+      { isPreloader ? <Preloader/> : (
 
       <Formik
         initialValues={initialValues}
         validationSchema={validateForm}
         onSubmit={(values, { resetForm }) => {
-          // eslint-disable-next-line prefer-const
-          let { name, email, phone, position } = values;
-          phone = phone.replace("(", "").replace(")", "").replace("-", "");
+          values.CardNumber = values.CardNumber.replace(/[\s()/]*/gm, "");
           dispatch(
-            createPayTC({ name, email, phone, position })
+            createPayTC(values)
           );
 
-          // console.log("values: ", values);
-          setUploadFileName("");
           resetForm(initialValues);
         }}
       >
@@ -56,21 +52,8 @@ const Form = ({ isServerError }) => {
           dirty,
           validateForm,
         }) => {
-          // console.log("upload value: ", values.upload);
-          // console.log('FormContainer render');
-          // console.table([values, errors, touched]);
-          // console.log("values: ", values);
 
-          // const onBlurAnotherPhonesHandler = (e) => {
-          //   const replaceValue = e.target.value
-          //     .replace(/^[;, ]*/g, "")
-          //     .replace(/[;,+ ]*$/g, "")
-          //     .replace(/\s{2,}/g, " ");
-          //   setFieldValue("anotherPhones", replaceValue);
-          //   handleBlur(e);
-          // };
-
-          const onChangePhoneHandler = (e) => {
+          const onChangeCardNumber = (e) => {
             // console.log(e);
             if (e.nativeEvent.inputType === "insertFromPaste") {
               // console.log(e.nativeEvent, 'input value');
@@ -80,29 +63,77 @@ const Form = ({ isServerError }) => {
             handleChange(e);
           };
 
-          const onPastePhoneHandler = (e) => {
+          const onPasteCardNumber = (e) => {
             const pasteText = e.clipboardData.getData("Text");
             // console.log("onPaste", pasteText);
             // console.log(e.clipboardData.getData('Text'));
-            const onlyNumbers = pasteText.replace(/[\s()+-]*/gm, "");
+            const onlyNumbers = pasteText.replace(/[\s()/]*/gm, "");
+            setFieldValue("CardNumber", onlyNumbers);
+          };
+
+          const onPasteExpDate = (e) => {
+            const pasteText = e.clipboardData.getData("Text");
+            // console.log("onPaste", pasteText);
+            // console.log(e.clipboardData.getData('Text'));
+            const onlyNumbers = pasteText.replace(/[\s()/]*/gm, "");
             // console.log(onlyNumbers);
-            const last9 = onlyNumbers.slice(-9);
-            setFieldValue("phone", last9);
+            // const last9 = onlyNumbers.slice(-9);
+            setFieldValue("ExpDate", onlyNumbers);
           };
 
           return (
             <form className={s.form} onSubmit={handleSubmit}>
-              <Input
-                // required
-                label="name"
+              <InputWithMask
+                label="Card number"
                 marginBottom={57}
-                errorMessage={errors.name}
-                touched={touched.name}
-                helperText="helperText"
-                placeholder="placeholder"
-                n={128}
-                value={values.name}
-                name="name"
+                mask="9999/9999/9999/9999"
+                helperText="xxxx/xxxx/xxxx/xxxx"
+                errorMessage={errors.CardNumber}
+                touched={touched.CardNumber}
+                placeholder="xxxx/xxxx/xxxx/xxxx"
+                value={values.CardNumber}
+                maxLength={16}
+                name="CardNumber"
+                onChange={onChangeCardNumber}
+                handleBlur={handleBlur}
+                setFieldValue={setFieldValue}
+                inputmode=""
+                handleReset={handleReset}
+                onPaste={onPasteCardNumber}
+                validateField={validateField}
+                setFieldTouched={setFieldTouched}
+              />
+
+              <InputWithMask
+                label="Expire date"
+                marginBottom={57}
+                mask="99/9999"
+                helperText="MM/YYYY"
+                errorMessage={errors.ExpDate}
+                touched={touched.ExpDate}
+                placeholder="Enter expire date MM/YYYY"
+                value={values.ExpDate}
+                maxLength={6}
+                name="ExpDate"
+                onChange={onChangeCardNumber}
+                handleBlur={handleBlur}
+                setFieldValue={setFieldValue}
+                handleReset={handleReset}
+                onPaste={onPasteExpDate}
+                validateField={validateField}
+                setFieldTouched={setFieldTouched}
+              />
+
+              <Input
+                label="CVV"
+                marginBottom={57}
+                errorMessage={errors.Cvv}
+                touched={touched.Cvv}
+                helperText="Format xxx"
+                placeholder="Enter your cvv number"
+                n={3}
+                value={values.Cvv}
+                name="Cvv"
                 onChange={handleChange}
                 handleBlur={handleBlur}
                 setFieldValue={setFieldValue}
@@ -112,42 +143,19 @@ const Form = ({ isServerError }) => {
               />
 
               <Input
-                label="name"
-                // required
+                label="Amount"
                 marginBottom={57}
-                errorMessage={errors.email}
-                touched={touched.email}
-                helperText="helperText"
-                placeholder="placeholder"
+                errorMessage={errors.Amount}
+                touched={touched.Amount}
+                helperText="Payment currency RUB"
+                placeholder="Enter the amount of your payment"
                 n={128}
-                value={values.email}
-                name="email"
+                value={values.Amount}
+                name="Amount"
                 onChange={handleChange}
                 handleBlur={handleBlur}
                 setFieldValue={setFieldValue}
-                inputmode="email"
-                validateField={validateField}
-                setFieldTouched={setFieldTouched}
-              />
-
-              <InputWithMask
-                label="name"
-                marginBottom={57}
-                // required
-                mask="+38(099)999-9999"
-                helperText="helperText"
-                errorMessage={errors.phone}
-                touched={touched.phone}
-                placeholder="placeholder"
-                value={values.phone}
-                maxLength={16}
-                name="phone"
-                onChange={onChangePhoneHandler}
-                handleBlur={handleBlur}
-                setFieldValue={setFieldValue}
-                inputmode="tel"
-                handleReset={handleReset}
-                onPaste={onPastePhoneHandler}
+                inputmode=""
                 validateField={validateField}
                 setFieldTouched={setFieldTouched}
               />
@@ -161,6 +169,12 @@ const Form = ({ isServerError }) => {
           );
         }}
       </Formik>
+
+      )}
+
+      {isServerError && <span className={s.error}>{isServerError}</span>}
+
+    
     </div>
   );
 };

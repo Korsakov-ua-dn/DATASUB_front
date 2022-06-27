@@ -29,8 +29,6 @@ const InputWithMask = ({
   };
 
   const isError = !!errorMessage && touched;
-  // const isOk = touched && !errorMessage && !!value.length;
-  // const isPaddingRight = isError || isOk;
 
   const trimSpace = (str) =>
     str
@@ -44,13 +42,6 @@ const InputWithMask = ({
     handleBlur(e);
   };
 
-  // const onChangeHandler = (e) => {
-  //   if (e.target.value.length) {
-  //     setFieldTouched(name, true);
-  //   }
-  //   onChange(e);
-  // };
-
   return (
     <div style={{ marginBottom: marginBottom }} className={s.wrapper}>
       <MaskedInput
@@ -60,11 +51,8 @@ const InputWithMask = ({
         onBlur={onBlurReplaceValue}
         mask={mask}
         disabled={disable}
-        // maskPlaceholder={null}
         maskChar={null}
-        // defaultFormatChars={formatChars}
         formatChars={formatChars}
-        // beforeMaskedValueChange={beforeMaskedValueChange}
         onPaste={onPaste}
       >
         {(inputProps) => (
@@ -79,9 +67,6 @@ const InputWithMask = ({
             name={name}
             inputProps={{
               inputMode: inputmode,
-              style: {
-                // paddingRight: isPaddingRight && "44px",
-              },
             }}
             {...inputProps}
           />

@@ -5,8 +5,7 @@ const instance = axios.create({
 });
 
 export const paymentsAPI = {
-
   postUser(payload) {
-    return instance.post(`/api/payments`, payload);
+    return instance.post(`/api/payments`, payload );
   },
 };

@@ -1,9 +1,9 @@
 export const variables = {
-  primaryColor: "#F4E041",
-  secondaryColor: "#00BDD3",
+  primaryColor: "#aaf4aa;",
+  secondaryColor: "#0070f3",
   tertiaryColor: "#EA5924",
-  backgroundColor: "#F8F8F8",
-  btnHoverPrimaryColor: "#FFE302",
+  backgroundColor: "transparent",
+  btnHoverPrimaryColor: "#aaf4aa",
   btnHoverSecondaryColor: "#02DDF6",
   errorColor: "#CB3D40",
   labelColor: "#7E7E7E",
