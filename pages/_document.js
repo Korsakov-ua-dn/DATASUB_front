@@ -37,7 +37,6 @@ class MyDocument extends Document {
             name="france-verif-confirmation"
             content="45660009aacaaa5a70d3fb308ec74019"
           />
-          <link rel="icon" href="/abz.svg" />
         </Head>
         <body>
           <Main />

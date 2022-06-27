@@ -100,8 +100,12 @@ export const InputWithStyle = styled(TextField)`
     &::placeholder {
       color: ${variables.labelColor};
       -webkit-text-fill-color: ${variables.labelColor};
-      opacity: 1;
+      opacity: 0;
     }
+  }
+
+  & .Mui-focused .MuiInputBase-input.MuiOutlinedInput-input::placeholder {
+    opacity: 1;
   }
 
   & fieldset {
