@@ -33,6 +33,7 @@ const Btn = ({
       line-height: 26px;
       letter-spacing: normal;
       text-transform: none;
+      bacground: none;
 
       & .text {
         padding: ${paddingMB};
@@ -55,8 +56,6 @@ const Btn = ({
         background: linear-gradient(to right, ${variables.btnHoverPrimaryColor}, #fff, ${variables.btnHoverPrimaryColor});
         transition: left .7s;
       }
-
-
     }
 
     &.MuiButton-sizeSmall {
@@ -110,11 +109,11 @@ const Btn = ({
         left: 0;
       }
 
-      // &:hover {
-      //   background-color: ${variables.btnHoverPrimaryColor};
-      //   border-color: ${variables.btnHoverPrimaryColor};
-      //   box-shadow: none;
-      // }
+      &:hover {
+        background-color: ${variables.primaryColor};
+        border-color: ${variables.primaryColor};
+        box-shadow: none;
+      }
     }
 
     &:active,
