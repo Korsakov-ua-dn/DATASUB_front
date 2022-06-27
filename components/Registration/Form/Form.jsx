@@ -53,16 +53,6 @@ const Form = ({ isServerError, isPreloader }) => {
           validateForm,
         }) => {
 
-          const onChangeCardNumber = (e) => {
-            // console.log(e);
-            if (e.nativeEvent.inputType === "insertFromPaste") {
-              // console.log(e.nativeEvent, 'input value');
-              e.preventDefault();
-              return;
-            }
-            handleChange(e);
-          };
-
           const onPasteCardNumber = (e) => {
             const pasteText = e.clipboardData.getData("Text");
             // console.log("onPaste", pasteText);
@@ -94,7 +84,7 @@ const Form = ({ isServerError, isPreloader }) => {
                 value={values.CardNumber}
                 maxLength={16}
                 name="CardNumber"
-                onChange={onChangeCardNumber}
+                onChange={handleChange}
                 handleBlur={handleBlur}
                 setFieldValue={setFieldValue}
                 inputmode=""
@@ -115,7 +105,7 @@ const Form = ({ isServerError, isPreloader }) => {
                 value={values.ExpDate}
                 maxLength={6}
                 name="ExpDate"
-                onChange={onChangeCardNumber}
+                onChange={handleChange}
                 handleBlur={handleBlur}
                 setFieldValue={setFieldValue}
                 handleReset={handleReset}
