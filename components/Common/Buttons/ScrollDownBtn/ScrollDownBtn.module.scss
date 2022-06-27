@@ -1,0 +1,31 @@
+@import "../../../../sassCommon/variables";
+
+.btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .text {
+    font-size: 12px;
+    line-height: 14px;
+    color: #7E7E7E;
+    margin-bottom: 10px;
+  }
+
+  &:hover {
+    .text {
+      color: $secondaryColor;
+    }
+
+    .icon {
+      path {
+        fill: $secondaryColor;
+      }
+    }
+  }
+}

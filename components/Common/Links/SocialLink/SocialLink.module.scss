@@ -1,0 +1,52 @@
+@import "../../../../sassCommon/variables";
+@import "../../../../sassCommon/mixines";
+
+.link {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #F4E041;
+  box-sizing: border-box;
+  border-radius: 100%;
+  -webkit-tap-highlight-color: transparent;
+
+  @include flexCenter(row);
+
+  &::before {
+    content: "";
+    position: absolute;
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+//.link:hover {
+//  border-color: $tertiaryColor;
+//
+//  path {
+//    fill: $tertiaryColor;
+//  }
+//}
+
+@media ("min-width: 1024px") {
+  .link::before {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+// эффект при наведении только для не сенсорных устройств
+@media not all and (hover: none) {
+  .link:hover {
+    border-color: $tertiaryColor;
+
+    path {
+      fill: $tertiaryColor;
+    }
+  }
+}
