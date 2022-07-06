@@ -15,6 +15,7 @@ const Btn = ({
   type,
   onClick,
 }) => {
+  console.log("Render btn");
   const paddingMB = !width && "0 28px";
   const paddingSB = !width && "0 34px";
 
@@ -192,4 +193,4 @@ const Btn = ({
   );
 };
 
-export default Btn;
+export default React.memo(Btn);

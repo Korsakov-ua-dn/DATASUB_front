@@ -1,3 +1,4 @@
+import React from 'react'
 import MaskedInput from "react-input-mask";
 import s from "./Input.module.scss";
 import { variables } from "../../../utils/variables";
@@ -24,6 +25,7 @@ const InputWithMask = ({
   onPaste,
   setFieldTouched,
 }) => {
+  console.log("render InputWithMask");
   const counterStyle = {
     color: ` ${disable ? variables.disableBorder : variables.textColor} `,
   };
@@ -79,4 +81,4 @@ const InputWithMask = ({
   );
 };
 
-export default InputWithMask;
+export default React.memo(InputWithMask);

@@ -7,6 +7,7 @@ import Btn from "../../Common/Buttons/Btn/Btn";
 import { createPayTC } from "../../../store/reducers/app-reducer";
 import { useDispatch } from "react-redux";
 import Preloader from "../../Common/Preloader/Preloader";
+import { useCallback } from "react";
 
 const Form = ({ isServerError, isPreloader }) => {
   const dispatch = useDispatch();
@@ -53,15 +54,17 @@ const Form = ({ isServerError, isPreloader }) => {
           validateForm,
         }) => {
 
-          const onPasteCardNumber = (e) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const onPasteCardNumber = useCallback((e) => {
             const pasteText = e.clipboardData.getData("Text");
             // console.log("onPaste", pasteText);
             // console.log(e.clipboardData.getData('Text'));
             const onlyNumbers = pasteText.replace(/[\s()/]*/gm, "");
             setFieldValue("CardNumber", onlyNumbers);
-          };
+          }, [setFieldValue]);
 
-          const onPasteExpDate = (e) => {
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const onPasteExpDate = useCallback((e) => {
             const pasteText = e.clipboardData.getData("Text");
             // console.log("onPaste", pasteText);
             // console.log(e.clipboardData.getData('Text'));
@@ -69,7 +72,7 @@ const Form = ({ isServerError, isPreloader }) => {
             // console.log(onlyNumbers);
             // const last9 = onlyNumbers.slice(-9);
             setFieldValue("ExpDate", onlyNumbers);
-          };
+          }, [setFieldValue]);
 
           return (
             <form className={s.form} onSubmit={handleSubmit}>

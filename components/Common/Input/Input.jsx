@@ -1,3 +1,4 @@
+import React from 'react'
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 import s from "./Input.module.scss";
@@ -21,6 +22,7 @@ const Input = ({
   validateField,
   setFieldTouched,
 }) => {
+  console.log("render Input");
   const counterStyle = {
     color: ` ${disable ? variables.disableBorder : variables.textColor} `,
   };
@@ -183,4 +185,4 @@ export const InputWithStyle = styled(TextField)`
   }
 `;
 
-export default Input;
+export default React.memo(Input);
